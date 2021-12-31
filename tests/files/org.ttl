@@ -1,0 +1,41 @@
+@prefix : <http://www.data4knowledge.dk/mdr/ORG/> .
+@prefix org: <http://www.data4knowledge.dk/schema/organizations#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DUNS123456789
+  rdf:type org:RegistrationAuthority ;
+  org:raNamespace :BBB ;
+  org:owner "true"^^xsd:boolean ;   
+  org:organizationIdentifier "123456789"^^xsd:string ;
+  org:internationalCodeDesignator "DUNS"^^xsd:string ; 
+.
+:DUNS111111111
+  rdf:type org:RegistrationAuthority ;
+  org:raNamespace :AAA ;
+  org:owner "false"^^xsd:boolean ;  
+  org:organizationIdentifier "111111111"^^xsd:string ;
+  org:internationalCodeDesignator "DUNS"^^xsd:string ; 
+.
+:AAA
+  rdf:type org:Namespace ;
+  org:name "AAA Long"^^xsd:string ;
+  org:shortName "AAA"^^xsd:string ; 
+  org:authority "www.aaa.com"^^xsd:string ;
+.
+:BBB
+  rdf:type org:Namespace ;
+  org:name "BBB Pharma"^^xsd:string ; 
+  org:shortName "BBB"^^xsd:string ; 
+  org:authority "www.bbb.com"^^xsd:string ;
+.
+PREFIX : <http://www.data4knowledge.dk/mdr/ORG/BBB#>
+:DDD
+  rdf:type org:Namespace ;
+  org:name "BBB Pharma"^^xsd:string ; 
+  org:shortName "BBB"^^xsd:string ; 
+  org:authority "www.bbb.com"^^xsd:string ;
+.
