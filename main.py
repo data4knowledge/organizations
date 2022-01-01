@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from rdfogm import Model, RdfTypeProperty, DataProperty, PropertyUri
 
 class RaTest(Model):
@@ -15,18 +15,31 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Organization microservice, version 1.0.0"}
+
+@app.get("/organization/{item_id}")
+async def organization(item_id):
+    ns = RaTest.find(item_id)
+    if ns == None:
+        raise HTTPException(status_code=404, detail="URI not found")
+    else:
+        return {"name": ns.name, "short_name": ns.short_name, "triples": ns.triples}
+
+@app.get("/namespace/{item_id}")
+async def namesapce(item_id):
+    ns = NsTest.find(item_id)
+    if ns == None:
+        raise HTTPException(status_code=404, detail="URI not found")
+    else:
+        return {"name": ns.name, "short_name": ns.short_name, "triples": ns.triples}
 
 @app.api_route("/{path_name:path}", methods=["GET"])
-async def catch_all(request: Request, path_name: str):
-    print("Path:", path_name)
-    print("Request:", request.url)
+async def resource(request: Request, path_name: str):
     uri = PropertyUri(f'http://www.data4knowledge.dk/{path_name}')
-    print("URI:", uri)
-    ns = NsTest.find(uri)
-    print("Result:", ns)
+    klass = Model.klass_for_type(uri)
+    ns = klass.find(uri)
     if ns == None:
-        return {"request_method": request.method, "path_name": path_name}
+        raise HTTPException(status_code=404, detail="URI not found")
     else:
         return {"name": ns.name, "short_name": ns.short_name, "triples": ns.triples}
     
