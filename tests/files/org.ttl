@@ -32,10 +32,3 @@
   org:shortName "BBB"^^xsd:string ; 
   org:authority "www.bbb.com"^^xsd:string ;
 .
-PREFIX : <http://www.data4knowledge.dk/mdr/ORG/BBB#>
-:DDD
-  rdf:type org:Namespace ;
-  org:name "BBB Pharma"^^xsd:string ; 
-  org:shortName "BBB"^^xsd:string ; 
-  org:authority "www.bbb.com"^^xsd:string ;
-.
