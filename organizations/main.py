@@ -39,11 +39,15 @@ async def namesapce(item_id):
 async def resource(request: Request, path_name: str):
     uri = PropertyUri(f'http://www.data4knowledge.dk/{path_name}')
     klass = Model.klass_for_uri(uri)
-    ns = klass.find(uri)
-    if ns == None:
+    print(f"Klass {klass}", flush=True)
+    if klass == None:
+        raise HTTPException(status_code=404, detail="URI not found")
+    object = eval(klass).find(uri)
+    print(f"Object {object}", flush=True)
+    if object == None:
         raise HTTPException(status_code=404, detail="URI not found")
     else:
-        return {"name": ns.name, "short_name": ns.short_name, "triples": ns.triples}
+        return {"type": object.__str__()}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

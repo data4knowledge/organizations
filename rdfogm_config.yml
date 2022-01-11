@@ -1,5 +1,4 @@
 rdf_types: 
-  http://www.example.com/A: ModelName
-  http://www.w3.org/Type1: Type1Test
-  http://www.w3.org/Type2: Type2Test
+  http://www.data4knowledge.dk/schema/organizations#Namespace: NsTest
+  http://www.data4knowledge.dk/schema/organizations#RegistrationAuthority: RaTest
 default_graph: http://www.data4knowledge/graphs/test
