@@ -38,8 +38,7 @@ async def namesapce(item_id):
 @app.api_route("/{path_name:path}", methods=["GET"])
 async def resource(request: Request, path_name: str):
     uri = PropertyUri(f'http://www.data4knowledge.dk/{path_name}')
-    #klass = Model.klass_for_type(uri)
-    klass = NsTest
+    klass = Model.klass_for_uri(uri)
     ns = klass.find(uri)
     if ns == None:
         raise HTTPException(status_code=404, detail="URI not found")
