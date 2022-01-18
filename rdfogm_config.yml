@@ -2,3 +2,4 @@ rdf_types:
   http://www.data4knowledge.dk/schema/organizations#Namespace: NsTest
   http://www.data4knowledge.dk/schema/organizations#RegistrationAuthority: RaTest
 default_graph: http://www.data4knowledge/graphs/test
+host: fuseki
