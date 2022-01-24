@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: organization
+
+spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: organization
+
+  ports:
+    - name: http
+      port: 80
+      nodePort: 31000
+
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: organization
+spec:
+  selector:
+    matchLabels:
+      app: organization
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: organization
+    spec:
+      containers:
+      - name: organization
+        image: organization
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fuseki
+
+spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: fuseki
+
+  ports:
+    - name: http
+      port: 3030
+
+  type: ClusterIP
